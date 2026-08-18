@@ -246,6 +246,7 @@
     box-shadow:0 30px 70px -30px rgba(0,0,0,0.7);
     cursor:zoom-in;
     transition:transform 0.25s, border-color 0.25s;
+    width: 100%;
   }
   .shot:hover{
     border-color:var(--accent);
@@ -323,6 +324,12 @@
     font-size:14px;
     color:var(--text-secondary);
     line-height:1.55;
+  }
+
+  .table-wrapper{
+    width:100%;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
   }
 
   table.data-table{
@@ -468,7 +475,7 @@
     text-transform:uppercase;
     letter-spacing:0.05em;
   }
-  .contact-list .row .v{color:var(--text-primary);}
+  .contact-list .row .v{color:var(--text-primary);word-break:break-word;}
   .contact-list .row a{color:var(--accent);text-decoration:none;transition:opacity 0.2s;}
   .contact-list .row a:hover{opacity:0.8;}
 
@@ -490,7 +497,7 @@
   .cover h1{
     font-family:var(--font-display);
     font-weight:700;
-    font-size:clamp(52px,9vw,116px);
+    font-size:clamp(42px,8vw,116px);
     letter-spacing:-0.02em;
     line-height:1;
   }
@@ -536,16 +543,85 @@
     color:var(--text-muted);
   }
 
-  @media (max-width:980px){
-    section.slide{padding:100px 26px 60px;}
-    .slide-num{left:26px;}
-    .slide-tag{right:26px;}
-    .grid-2,.grid-3,.grid-4{grid-template-columns:1fr;}
-    .compare{grid-template-columns:1fr;}
-    #counter{left:26px;}
-    nav#dots{display:none;}
-    h1.headline{font-size:28px;}
-    .cover h1{font-size:15vw;}
+  /* АДАПТИВНЫЕ СТИЛИ (Планшеты и Ноутбуки) */
+  @media (max-width: 1200px) {
+    section.slide { padding: 80px 60px; }
+    .slide-num { left: 60px; }
+    .slide-tag { right: 60px; }
+    #counter { left: 60px; }
+    .grid-4 { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .grid-3 { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  }
+
+  @media (max-width: 980px){
+    #deck {
+      scroll-snap-type: none; /* Отключаем жесткий снэп, чтобы контент не обрезался на мобильных */
+    }
+    section.slide {
+      min-height: 100vh;
+      height: auto;
+      padding: 90px 26px 70px;
+      scroll-snap-align: none;
+      scroll-snap-stop: normal;
+    }
+    .slide-num{left:26px; top:30px;}
+    .slide-tag{right:26px; top:30px;}
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; gap: 20px; }
+    .compare { grid-template-columns: 1fr; }
+    #counter { left: 26px; bottom: 20px; }
+    .nav-arrows { right: 26px; bottom: 20px; }
+    nav#dots { display: none; }
+    h1.headline { font-size: clamp(24px, 5vw, 36px); }
+    p.lede { font-size: 16px; }
+    
+    .cover h1 { font-size: clamp(38px, 10vw, 72px); }
+    .cover .sub { font-size: 16px; margin-top: 20px; }
+    .cover .tagline { margin-top: 36px; font-size: 13px; }
+    .cover .meta {
+      position: relative;
+      bottom: auto;
+      margin-top: 40px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .stat-row { flex-wrap: wrap; gap: 24px; margin-top: 24px; }
+    .stat .val { font-size: 28px; }
+    .stat .lab { max-width: 100%; }
+
+    table.data-table { min-width: 500px; }
+  }
+
+  /* Мобильные устройства */
+  @media (max-width: 576px) {
+    section.slide { padding: 75px 16px 60px; }
+    .slide-num { left: 16px; top: 20px; font-size: 11px; }
+    .slide-tag { right: 16px; top: 20px; font-size: 11px; }
+    .eyebrow { font-size: 11px; margin-bottom: 14px; gap: 6px; }
+    .eyebrow::before { width: 14px; }
+
+    h1.headline { font-size: 22px; line-height: 1.25; margin-bottom: 16px; }
+    p.lede { font-size: 14.5px; line-height: 1.5; }
+
+    .card { padding: 20px 18px; }
+    .card h3 { font-size: 15.5px; }
+    .card p { font-size: 13.5px; }
+
+    .pkg-card { padding: 24px 20px; }
+    .pkg-card h3 { font-size: 19px; }
+
+    .stat-row { gap: 16px; }
+    .stat .val { font-size: 24px; }
+    .stat .lab { font-size: 12px; }
+
+    .contact-list .row { flex-direction: column; gap: 4px; }
+    .contact-list .row .k { width: auto; }
+
+    .closing h1 { font-size: 22px; }
+
+    #counter { left: 16px; bottom: 16px; font-size: 11px; }
+    .nav-arrows { right: 16px; bottom: 12px; }
+    .nav-arrows button { width: 32px; height: 32px; }
   }
 </style>
 </head>
@@ -699,13 +775,15 @@
   <h1 class="headline">Извлечение сущностей: <span class="accent">люди, суммы, статьи ГК</span></h1>
   <div class="grid-2" style="margin-top:20px;align-items:start;">
     <div class="shot"><img src="./8.jpg" alt="Извлечение сущностей и автоперелинковка в Хранителе"></div>
-    <table class="data-table">
-      <tr><td class="mono">01</td><td class="strong">Организации и ООО</td><td>Поиск всех упоминаний контрагентов в базе</td></tr>
-      <tr><td class="mono">02</td><td class="strong">Люди и персоны</td><td>Автоматическая привязка подписантов и юристов</td></tr>
-      <tr><td class="mono">03</td><td class="strong">Суды и инстанции</td><td>Разделение дел по арбитражам и регионам</td></tr>
-      <tr><td class="mono">04</td><td class="strong">Нормы права</td><td>Индексация статей ТК РФ, ГК РФ и законов</td></tr>
-      <tr><td class="mono">05</td><td class="strong">Суммы и цены</td><td>Выделение сумм исков, задолженностей и авансов</td></tr>
-    </table>
+    <div class="table-wrapper">
+      <table class="data-table">
+        <tr><td class="mono">01</td><td class="strong">Организации и ООО</td><td>Поиск всех упоминаний контрагентов в базе</td></tr>
+        <tr><td class="mono">02</td><td class="strong">Люди и персоны</td><td>Автоматическая привязка подписантов и юристов</td></tr>
+        <tr><td class="mono">03</td><td class="strong">Суды и инстанции</td><td>Разделение дел по арбитражам и регионам</td></tr>
+        <tr><td class="mono">04</td><td class="strong">Нормы права</td><td>Индексация статей ТК РФ, ГК РФ и законов</td></tr>
+        <tr><td class="mono">05</td><td class="strong">Суммы и цены</td><td>Выделение сумм исков, задолженностей и авансов</td></tr>
+      </table>
+    </div>
   </div>
 </section>
 
@@ -743,15 +821,17 @@
   <div class="slide-tag">Техническая часть</div>
   <div class="eyebrow">Архитектура</div>
   <h1 class="headline">Современный <span class="accent">отчуждаемый</span> стек</h1>
-  <table class="data-table" style="margin-top:24px;max-width:920px;">
-    <tr><th>Компонент</th><th>Назначение</th><th>Технология</th></tr>
-    <tr><td class="strong">Фронтенд</td><td>Интерфейс: архив, 6 моделей, чат, поиск, гибкий граф</td><td class="mono">React 18 / Vite / Tailwind</td></tr>
-    <tr><td class="strong">AI & Auth Server</td><td>Сессии, роли JWT, RAG-чат, интеграция с LLM</td><td class="mono">FastAPI / Python 3.11</td></tr>
-    <tr><td class="strong">Сервер / Хостинг</td><td>Облачный сервер / Выделенный контур в РФ</td><td class="mono">Рег.ру (Reg.ru Cloud / Dedicated)</td></tr>
-    <tr><td class="strong">OCR Движок</td><td>Распознавание сканов и изображений (rus + eng)</td><td class="mono">Tesseract OCR</td></tr>
-    <tr><td class="strong">База данных</td><td>Реляционные данные + векторные эмбеддинги</td><td class="mono">PostgreSQL 16 + pgvector</td></tr>
-    <tr><td class="strong">ИИ-Модель (LLM)</td><td>Оптимальный RAG-баланс качества и стоимости</td><td class="mono">DeepSeek-V3 / Qwen 2.5 72B (vLLM)</td></tr>
-  </table>
+  <div class="table-wrapper" style="margin-top:24px;max-width:920px;">
+    <table class="data-table">
+      <tr><th>Компонент</th><th>Назначение</th><th>Технология</th></tr>
+      <tr><td class="strong">Фронтенд</td><td>Интерфейс: архив, 6 моделей, чат, поиск, гибкий граф</td><td class="mono">React 18 / Vite / Tailwind</td></tr>
+      <tr><td class="strong">AI & Auth Server</td><td>Сессии, роли JWT, RAG-чат, интеграция с LLM</td><td class="mono">FastAPI / Python 3.11</td></tr>
+      <tr><td class="strong">Сервер / Хостинг</td><td>Облачный сервер / Выделенный контур в РФ</td><td class="mono">Рег.ру (Reg.ru Cloud / Dedicated)</td></tr>
+      <tr><td class="strong">OCR Движок</td><td>Распознавание сканов и изображений (rus + eng)</td><td class="mono">Tesseract OCR</td></tr>
+      <tr><td class="strong">База данных</td><td>Реляционные данные + векторные эмбеддинги</td><td class="mono">PostgreSQL 16 + pgvector</td></tr>
+      <tr><td class="strong">ИИ-Модель (LLM)</td><td>Оптимальный RAG-баланс качества и стоимости</td><td class="mono">GPT 5.6 Luna</td></tr>
+    </table>
+  </div>
 </section>
 
 <section class="slide" id="s11">
@@ -784,12 +864,14 @@
   <div class="slide-tag">Экономика</div>
   <div class="eyebrow">Расчёт окупаемости</div>
   <h1 class="headline">Экономия сотен часов работы команды</h1>
-  <table class="data-table" style="margin-top:24px;">
-    <tr><th>Сценарий</th><th>Без системы</th><th>C системой «Хранитель»</th><th>Экономия</th></tr>
-    <tr><td class="strong">Поиск договора по условию</td><td>15–30 минут вручную</td><td class="mono">2 секунды</td><td class="mono">до 98% времени</td></tr>
-    <tr><td class="strong">Разбор входящего скана</td><td>5–10 минут на папку</td><td class="mono">Автоматически</td><td class="mono">100% авторутина</td></tr>
-    <tr><td class="strong">Подготовка подборки в суд</td><td>2 дня работы юриста</td><td class="mono">15 минут (выгрузка)</td><td class="mono">~15 часов юриста</td></tr>
-  </table>
+  <div class="table-wrapper" style="margin-top:24px;">
+    <table class="data-table">
+      <tr><th>Сценарий</th><th>Без системы</th><th>C системой «Хранитель»</th><th>Экономия</th></tr>
+      <tr><td class="strong">Поиск договора по условию</td><td>15–30 минут вручную</td><td class="mono">2 секунды</td><td class="mono">до 98% времени</td></tr>
+      <tr><td class="strong">Разбор входящего скана</td><td>5–10 минут на папку</td><td class="mono">Автоматически</td><td class="mono">100% авторутина</td></tr>
+      <tr><td class="strong">Подготовка подборки в суд</td><td>2 дня работы юриста</td><td class="mono">15 минут (выгрузка)</td><td class="mono">~15 часов юриста</td></tr>
+    </table>
+  </div>
   <p class="lede" style="margin-top:22px;">Система окупается в первые 2–3 месяца за счёт освобождения квалифицированных юристов от рутинного разбора бумаг.</p>
 </section>
 
@@ -824,7 +906,7 @@
       <ul>
         <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Полный исходный код frontend & backend компонентов</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Настройка Docker Compose и деплой на Рег.ру</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Подключение Tesseract OCR, DeepSeek-V3 / Qwen 2.5 и pgvector</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Подключение Tesseract OCR, GPT 5.6 Luna</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Документация по архитектуре и развёртыванию</li>
       </ul>
       <div class="pkg-time">Срок передачи: 1–2 недели</div>
@@ -986,7 +1068,6 @@
   /* Увеличение скриншотов по клику */
   var lightbox = document.getElementById('lightbox-modal');
   var lightboxImg = document.getElementById('lightbox-img');
-  var lightboxClose = document.querySelector('.lightbox-close');
 
   document.querySelectorAll('.shot').forEach(function(shot){
     shot.addEventListener('click', function(){
