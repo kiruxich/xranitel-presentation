@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Хранитель — Умный архив документов и AI-поиск | Alba Creation</title>
+<title>Хранитель — Защищенная система автоматического распознавания и AI-поиска | Alba Creation</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -93,7 +93,7 @@
     font-size:18px;
     line-height:1.65;
     color:var(--text-secondary);
-    max-width:660px;
+    max-width:760px;
     font-weight:400;
   }
   .slide-num{
@@ -237,7 +237,6 @@
   }
   .icon-box svg{width:18px;height:18px;stroke:var(--accent);}
 
-  /* Стили для скриншотов с лупой и кликом */
   .shot{
     position:relative;
     border-radius:12px;
@@ -247,6 +246,10 @@
     cursor:zoom-in;
     transition:transform 0.25s, border-color 0.25s;
     width: 100%;
+  }
+  .shot.single-center{
+    max-width: 860px;
+    margin: 20px auto 0;
   }
   .shot:hover{
     border-color:var(--accent);
@@ -266,7 +269,6 @@
     opacity:1;
   }
 
-  /* Модальное окно для полноэкранного просмотра */
   .lightbox{
     display:none;
     position:fixed;
@@ -371,7 +373,12 @@
     color:var(--text-secondary);
   }
 
-  .stat-row{display:flex;gap:48px;margin-top:32px;}
+  .stat-row{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:28px;
+    margin-top:36px;
+  }
   .stat{}
   .stat .val{
     font-family:var(--font-display);
@@ -385,7 +392,6 @@
     font-size:13px;
     color:var(--text-muted);
     margin-top:8px;
-    max-width:160px;
     line-height:1.4;
   }
 
@@ -461,6 +467,32 @@
     color:var(--text-muted);
     font-family:var(--font-mono);
   }
+  .pkg-card .pkg-support{
+    margin-top:14px;
+    display:inline-flex;
+    align-items:baseline;
+    gap:7px;
+    padding:8px 14px;
+    border-radius:20px;
+    background:var(--accent-soft);
+    border:1px solid var(--accent-dim);
+    font-family:var(--font-mono);
+    font-size:12.5px;
+    color:var(--text-secondary);
+  }
+  .pkg-card .pkg-support b{
+    color:var(--accent);
+    font-size:13.5px;
+    font-weight:600;
+  }
+  .pkg-card .pkg-scope{
+    font-family:var(--font-mono);
+    font-size:11.5px;
+    color:var(--text-muted);
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    margin-bottom:6px;
+  }
 
   .cta-row{display:flex;gap:16px;margin-top:36px;align-items:center;flex-wrap:wrap;}
   
@@ -502,18 +534,23 @@
     line-height:1;
   }
   .cover .sub{
-    font-size:19px;
-    color:var(--text-secondary);
-    max-width:640px;
+    font-size:20px;
+    color:var(--text-primary);
+    max-width:760px;
     margin:26px auto 0;
-    line-height:1.6;
+    line-height:1.5;
+    font-weight:500;
   }
+  .cover .sub .accent{color:var(--accent);}
   .cover .tagline{
-    margin-top:56px;
-    font-family:var(--font-display);
-    font-size:14px;
-    color:var(--accent);
-    letter-spacing:0.02em;
+    margin-top:36px;
+    font-family:var(--font-body);
+    font-size:16px;
+    color:var(--text-secondary);
+    max-width:680px;
+    margin-left:auto;
+    margin-right:auto;
+    line-height:1.6;
   }
   .cover .meta{
     position:absolute;
@@ -543,7 +580,6 @@
     color:var(--text-muted);
   }
 
-  /* АДАПТИВНЫЕ СТИЛИ (Планшеты и Ноутбуки) */
   @media (max-width: 1200px) {
     section.slide { padding: 80px 60px; }
     .slide-num { left: 60px; }
@@ -551,11 +587,12 @@
     #counter { left: 60px; }
     .grid-4 { grid-template-columns: repeat(2, 1fr); gap: 18px; }
     .grid-3 { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .stat-row { grid-template-columns: repeat(2, 1fr); }
   }
 
   @media (max-width: 980px){
     #deck {
-      scroll-snap-type: none; /* Отключаем жесткий снэп, чтобы контент не обрезался на мобильных */
+      scroll-snap-type: none;
     }
     section.slide {
       min-height: 100vh;
@@ -575,8 +612,8 @@
     p.lede { font-size: 16px; }
     
     .cover h1 { font-size: clamp(38px, 10vw, 72px); }
-    .cover .sub { font-size: 16px; margin-top: 20px; }
-    .cover .tagline { margin-top: 36px; font-size: 13px; }
+    .cover .sub { font-size: 17px; margin-top: 20px; }
+    .cover .tagline { margin-top: 24px; font-size: 14px; }
     .cover .meta {
       position: relative;
       bottom: auto;
@@ -585,14 +622,12 @@
       gap: 12px;
     }
 
-    .stat-row { flex-wrap: wrap; gap: 24px; margin-top: 24px; }
+    .stat-row { grid-template-columns: 1fr; gap: 24px; margin-top: 24px; }
     .stat .val { font-size: 28px; }
-    .stat .lab { max-width: 100%; }
 
     table.data-table { min-width: 500px; }
   }
 
-  /* Мобильные устройства */
   @media (max-width: 576px) {
     section.slide { padding: 75px 16px 60px; }
     .slide-num { left: 16px; top: 20px; font-size: 11px; }
@@ -609,10 +644,6 @@
 
     .pkg-card { padding: 24px 20px; }
     .pkg-card h3 { font-size: 19px; }
-
-    .stat-row { gap: 16px; }
-    .stat .val { font-size: 24px; }
-    .stat .lab { font-size: 12px; }
 
     .contact-list .row { flex-direction: column; gap: 4px; }
     .contact-list .row .k { width: auto; }
@@ -648,11 +679,11 @@
   <div class="cover-inner">
     <div class="brand">Alba Creation · коммерческое предложение</div>
     <h1>Хранитель</h1>
-    <p class="sub">Умный архив документов и AI-ассистент под ключ — для компаний и юридических бюро, уставших терять время на ручной поиск сканов и файлов</p>
-    <div class="tagline">Документы находятся мгновенно через смыслы, а не по названиям файлов</div>
+    <p class="sub" >Документы находятся мгновенно через смыслы, а не по названиям файлов</p>
+    <div class="tagline">Автономный умный архив и AI-поиск в закрытом контуре для компаний и юридических бюро. 100% приватность без передачи данных во внешние нейросети.</div>
   </div>
   <div class="meta">
-    <span>Август 2026</span><span>·</span><span>Версия 1.1</span><span>·</span><span>18 слайдов</span>
+    <span>Август 2026</span><span>·</span><span>Версия 2.1</span><span>·</span><span>18 слайдов</span>
   </div>
 </section>
 
@@ -660,28 +691,28 @@
   <div class="slide-num">02 / 18</div>
   <div class="slide-tag">Проблема</div>
   <div class="eyebrow">Как устроена работа сейчас</div>
-  <h1 class="headline">Архив превращается в <span class="accent">«чёрный ящик»</span> сканов и папок</h1>
-  <p class="lede">Юристы и менеджеры тратят десятки часов на чтение сканов, поиск условий в договорах и раскладку входящих файлов по папкам.</p>
+  <h1 class="headline">Защищенная система автоматического распознавания и <span class="accent">AI-поиска</span></h1>
+  <p class="lede">Юристы и менеджеры тратят сотни часов на ручную проверку сканов, а загрузка документов в публичные сервисы прямо нарушает NDA и требования информационной безопасности.</p>
   <div class="grid-4" style="margin-top:48px;">
     <div class="card">
       <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg></div>
       <h3>Слепой поиск по PDF</h3>
-      <p>Обычный поиск на скан-копиях и не распознанных PDF не работает — приходится открывать каждый документ вручную</p>
+      <p>Стандартный поиск по нераспознанным PDF и сканам не работает — приходится открывать каждый документ вручную</p>
     </div>
     <div class="card">
       <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8v4l3 3M12 3a9 9 0 100 18 9 9 0 000-18z"/></svg></div>
       <h3>Хаос в папках и Inbox</h3>
-      <p>Скан с телефона или письмо с договором от заказчика теряется, если сразу не занести его в нужную папку дела</p>
+      <p>Скан с телефона или договор из почты моментально теряется, если сотрудникам негде его централизованно сохранить</p>
     </div>
     <div class="card">
       <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8z"/></svg></div>
       <h3>Зависимость от юриста</h3>
-      <p>Память о деталях судебных дел и связях контрагентов уходит вместе с уволившимся сотрудником</p>
+      <p>Вся память о деталях судебных дел, условиях договоров и связях контрагентов уходит вместе с уволившимся сотрудником</p>
     </div>
     <div class="card">
       <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg></div>
-      <h3>Утечка коммерческих данных</h3>
-      <p>Передача документов во внешние публичные нейросети несёт риски нарушения конфиденциальности</p>
+      <h3>Утечка коммерческой тайны</h3>
+      <p>Отправка договоров и сканов во внешние облачные нейросети создаёт прямую угрозу безопасности бизнеса</p>
     </div>
   </div>
 </section>
@@ -690,13 +721,13 @@
   <div class="slide-num">03 / 18</div>
   <div class="slide-tag">Решение</div>
   <div class="eyebrow">Alba Creation</div>
-  <h1 class="headline">Готовая система <span class="accent">автоматического распознавания</span> и AI-поиска</h1>
-  <p class="lede">«Хранитель» — полный инженерно-программный комплекс, готовый к развёртыванию в вашем изолированном контуре на Рег.ру. Полный контроль над данными, OCR и AI-поиск без сторонних подписок.</p>
+  <h1 class="headline">Безопасность и <span class="accent">полная автономия</span></h1>
+  <p class="lede">«Хранитель» — это полностью независимое программное решение для бизнеса. Система разворачивается в вашем закрытом защищенном контуре или в надежном облаке Reg.ru на территории РФ. Встроенный искусственный интеллект работает изолированно и строго внутри сервера, гарантируя абсолютную конфиденциальность данных.</p>
   <div class="stat-row">
+    <div class="stat"><div class="val">0<span class="accent">%</span></div><div class="lab">передачи данных во внешние API или за рубеж</div></div>
+    <div class="stat"><div class="val">100<span class="accent">%</span></div><div class="lab">автономное OCR-распознавание сканов (rus/eng)</div></div>
+    <div class="stat"><div class="val"><span class="accent">&lt; 1 сек</span></div><div class="lab">мгновенный семантический RAG-поиск по базе</div></div>
     <div class="stat"><div class="val"><span class="accent">6</span></div><div class="lab">динамических моделей структуры архива</div></div>
-    <div class="stat"><div class="val">100<span class="accent">%</span></div><div class="lab">автоматическое распознавание OCR (rus/eng)</div></div>
-    <div class="stat"><div class="val"><span class="accent">&lt; 1 сек</span></div><div class="lab">семантический поиск по миллионам страниц</div></div>
-    <div class="stat"><div class="val"><span class="accent">0₽</span></div><div class="lab">зависимость от подписок внешних облаков</div></div>
   </div>
 </section>
 
@@ -704,7 +735,7 @@
   <div class="slide-num">04 / 18</div>
   <div class="slide-tag">Функционал</div>
   <div class="eyebrow">Модели архива</div>
-  <h1 class="headline">Один архив — шесть удобных <span class="accent">ракурсов обзора</span></h1>
+  <h1 class="headline">Один архив — <span class="accent">шесть динамических моделей</span> структуры</h1>
   <div class="grid-2" style="margin-top:20px;align-items:start;">
     <div class="steps">
       <div class="step">
@@ -737,15 +768,15 @@
   <div class="slide-num">05 / 18</div>
   <div class="slide-tag">Организация</div>
   <div class="eyebrow">Типы документов</div>
-  <h1 class="headline">Автоматическая сортировка <span class="accent">по категориям</span></h1>
+  <h1 class="headline">Автоматическая классификация <span class="accent">по категориям</span></h1>
   <div class="grid-2" style="margin-top:20px;align-items:start;">
     <div class="shot"><img src="./4.jpg" alt="Группировка по типам документов в системе Хранитель"></div>
     <div>
-      <p class="lede">Система сама определяет категорию документа и связывает его с нужной компанией или договором:</p>
+      <p class="lede">Система сама распознаёт категорию входящего файла и мгновенно привязывает его к нужному контрагенту или судебному делу:</p>
       <div class="steps" style="margin-top:20px;">
-        <div class="step"><div class="step-n">01</div><div class="step-body"><h4>Договоры и спецификации</h4><p>Группировка по номерам, датам действия и приложениям</p></div></div>
-        <div class="step"><div class="step-n">02</div><div class="step-body"><h4>Переписка и требования</h4><p>Учёт входящих/исходящих писем, претензий и ответов ИФНС</p></div></div>
-        <div class="step"><div class="step-n">03</div><div class="step-body"><h4>Судебные документы</h4><p>Исковые заявления, определения и жалобы в связке с судами</p></div></div>
+        <div class="step"><div class="step-n">01</div><div class="step-body"><h4>Договоры и спецификации</h4><p>Автоматическая группировка по номерам, датам действия и приложениям</p></div></div>
+        <div class="step"><div class="step-n">02</div><div class="step-body"><h4>Переписка и требования</h4><p>Систематизация входящих/исходящих писем, претензий и ответов ИФНС</p></div></div>
+        <div class="step"><div class="step-n">03</div><div class="step-body"><h4>Судебные документы</h4><p>Исковые заявления, определения и жалобы в жесткой привязке к судам</p></div></div>
       </div>
     </div>
   </div>
@@ -755,13 +786,13 @@
   <div class="slide-num">06 / 18</div>
   <div class="slide-tag">Статусы дел</div>
   <div class="eyebrow">Контроль процессов</div>
-  <h1 class="headline">Инбокс «Не разобрано» и <span class="accent">канбан-доска</span> дел</h1>
+  <h1 class="headline">Раздел «Не разобрано» и <span class="accent">канбан-доска</span> процессов</h1>
   <div class="grid-2" style="margin-top:20px;align-items:start;">
     <div>
-      <p class="lede">Скан с телефона или PDF из почты моментально попадает в раздел «Не разобрано». Система запускает OCR, распознаёт текст и предлагает привязку к клиенту.</p>
-      <div class="stat-row" style="margin-top:36px;">
-        <div class="stat"><div class="val">4</div><div class="lab">статуса дел — от активных до закрытого архива</div></div>
-        <div class="stat"><div class="val">0</div><div class="lab">потерянных сканов с моментальным потоковым OCR</div></div>
+      <p class="lede">Скан с телефона или PDF из почты моментально попадает в раздел «Не разобрано». Локальный движок запускает потоковый OCR, индексирует текст и предлагает точную привязку.</p>
+      <div class="stat-row" style="margin-top:36px;grid-template-columns:1fr 1fr;">
+        <div class="stat"><div class="val">4</div><div class="lab">прозрачных статуса — от входящего до закрытого дела</div></div>
+        <div class="stat"><div class="val">0</div><div class="lab">потерянных сканов с зашифрованным хранением</div></div>
       </div>
     </div>
     <div class="shot"><img src="./7.jpg" alt="Статусы дел и не разобранные сканы в Хранителе"></div>
@@ -777,11 +808,11 @@
     <div class="shot"><img src="./8.jpg" alt="Извлечение сущностей и автоперелинковка в Хранителе"></div>
     <div class="table-wrapper">
       <table class="data-table">
-        <tr><td class="mono">01</td><td class="strong">Организации и ООО</td><td>Поиск всех упоминаний контрагентов в базе</td></tr>
-        <tr><td class="mono">02</td><td class="strong">Люди и персоны</td><td>Автоматическая привязка подписантов и юристов</td></tr>
-        <tr><td class="mono">03</td><td class="strong">Суды и инстанции</td><td>Разделение дел по арбитражам и регионам</td></tr>
-        <tr><td class="mono">04</td><td class="strong">Нормы права</td><td>Индексация статей ТК РФ, ГК РФ и законов</td></tr>
-        <tr><td class="mono">05</td><td class="strong">Суммы и цены</td><td>Выделение сумм исков, задолженностей и авансов</td></tr>
+        <tr><td class="mono">01</td><td class="strong">Организации и ООО</td><td>Быстрый поиск всех упоминаний контрагентов по всей базе</td></tr>
+        <tr><td class="mono">02</td><td class="strong">Люди и персоны</td><td>Автоматическая привязка подписантов, юристов и директоров</td></tr>
+        <tr><td class="mono">03</td><td class="strong">Суды и инстанции</td><td>Разделение дел по арбитражам и судебным участкам</td></tr>
+        <tr><td class="mono">04</td><td class="strong">Нормы права</td><td>Мгновенная индексация статей ТК РФ, ГК РФ и кодексов</td></tr>
+        <tr><td class="mono">05</td><td class="strong">Суммы и финансовые риски</td><td>Авто-выделение сумм исков, авансов и задолженностей</td></tr>
       </table>
     </div>
   </div>
@@ -791,13 +822,13 @@
   <div class="slide-num">08 / 18</div>
   <div class="slide-tag">AI-Ассистент</div>
   <div class="eyebrow">Запросы на естественном языке</div>
-  <h1 class="headline">Задавайте вопросы <span class="accent">своей базе знаний</span></h1>
+  <h1 class="headline">Интеллектуальный чат <span class="accent">по всей вашей базе</span></h1>
   <div class="grid-2" style="margin-top:20px;align-items:start;">
     <div>
-      <p class="lede">«Хранитель» понимает вопросы на человеческом языке. Он ищет информацию по миллионам распознанных слов и выдаёт точный ответ со ссылкой на исходный скан.</p>
+      <p class="lede">Задавайте вопросы на человеческом языке. Локальная нейросеть анализирует векторную базу знания компании и выдаёт точный ответ со строгими ссылками на первоисточники.</p>
       <div class="steps" style="margin-top:20px;">
-        <div class="step"><div class="step-n"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke:var(--accent)"><path d="M20 6L9 17l-5-5"/></svg></div><div class="step-body"><h4>Поиск по контексту</h4><p>Найдёт пункт договора, даже если вы не помните его точную формулировку</p></div></div>
-        <div class="step"><div class="step-n"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke:var(--accent)"><path d="M20 6L9 17l-5-5"/></svg></div><div class="step-body"><h4>Цитаты и выдержки</h4><p>Ответ снабжается прямыми цитатами и ссылкой на конкретную страницу PDF</p></div></div>
+        <div class="step"><div class="step-n"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke:var(--accent)"><path d="M20 6L9 17l-5-5"/></svg></div><div class="step-body"><h4>Поиск по смыслу (RAG)</h4><p>Найдут точный пункт договора, даже если сформулировать запрос другими словами</p></div></div>
+        <div class="step"><div class="step-n"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke:var(--accent)"><path d="M20 6L9 17l-5-5"/></svg></div><div class="step-body"><h4>Прямые цитаты и линки</h4><p>Ответ ИИ подкрепляется точной цитатой и прямой ссылкой на конкретную страницу PDF</p></div></div>
       </div>
     </div>
     <div class="shot"><img src="./10.jpg" alt="Диалог с AI-ассистентом Хранитель"></div>
@@ -808,52 +839,49 @@
   <div class="slide-num">09 / 18</div>
   <div class="slide-tag">Безопасность</div>
   <div class="eyebrow">Управление доступом</div>
-  <h1 class="headline">Мульти-арендность и <span class="accent">изоляция данных</span></h1>
-  <div class="grid-2" style="margin-top:20px;align-items:start;">
-    <div class="shot"><img src="./2.jpg" alt="Панель администратора и управление сотрудниками"></div>
-    <div class="shot"><img src="./1.jpg" alt="Управление организациями в закрытом контуре"></div>
-  </div>
-  <p class="lede" style="margin-top:24px;">Единая платформа позволяет изолировать документы разных юрлиц или филиалов (`org_id`). Администратор управляет доступом и ролями сотрудников в удобном кабинете.</p>
+  <h1 class="headline">Управление сотрудниками и <span class="accent">права доступа</span></h1>
+  <p class="lede" style="margin-bottom:20px;">Удобное разграничение ролей внутри вашей компании. Администратор контролирует права пользователей, доступ к подразделениям и рабочим пространствам из единого кабинета.</p>
+  <div class="shot single-center"><img src="./2.jpg" alt="Управление сотрудниками и правами доступа"></div>
 </section>
 
 <section class="slide" id="s10">
   <div class="slide-num">10 / 18</div>
   <div class="slide-tag">Техническая часть</div>
   <div class="eyebrow">Архитектура</div>
-  <h1 class="headline">Современный <span class="accent">отчуждаемый</span> стек</h1>
+  <h1 class="headline">Полностью <span class="accent">автономный</span> инженерный стек</h1>
   <div class="table-wrapper" style="margin-top:24px;max-width:920px;">
     <table class="data-table">
       <tr><th>Компонент</th><th>Назначение</th><th>Технология</th></tr>
-      <tr><td class="strong">Фронтенд</td><td>Интерфейс: архив, 6 моделей, чат, поиск, гибкий граф</td><td class="mono">React 18 / Vite / Tailwind</td></tr>
-      <tr><td class="strong">AI & Auth Server</td><td>Сессии, роли JWT, RAG-чат, интеграция с LLM</td><td class="mono">FastAPI / Python 3.11</td></tr>
-      <tr><td class="strong">Сервер / Хостинг</td><td>Облачный сервер / Выделенный контур в РФ</td><td class="mono">Рег.ру (Reg.ru Cloud / Dedicated)</td></tr>
-      <tr><td class="strong">OCR Движок</td><td>Распознавание сканов и изображений (rus + eng)</td><td class="mono">Tesseract OCR</td></tr>
+      <tr><td class="strong">Фронтенд</td><td>Интерфейс: архив, чат, 6 моделей, управление ролями</td><td class="mono">React 18 / Vite / Tailwind</td></tr>
+      <tr><td class="strong">Бэкенд & Auth</td><td>Сессии, роли JWT, очереди задач, RAG-конвейер</td><td class="mono">Python / FastAPI</td></tr>
+      <tr><td class="strong">OCR Движок</td><td>Распознавание сканов (rus + eng) локально</td><td class="mono">Tesseract OCR</td></tr>
       <tr><td class="strong">База данных</td><td>Реляционные данные + векторные эмбеддинги</td><td class="mono">PostgreSQL 16 + pgvector</td></tr>
-      <tr><td class="strong">ИИ-Модель (LLM)</td><td>Оптимальный RAG-баланс качества и стоимости</td><td class="mono">GPT 5.6 Luna</td></tr>
+      <tr><td class="strong">ИИ-Движок (LLM)</td><td>Локальная генерация ответов в закрытом контуре</td><td class="mono">Автономный локальный сервер</td></tr>
+      <tr><td class="strong">Инфраструктура</td><td>Выделенный контур в РФ / GPU-ускорение</td><td class="mono">Серверы Reg.ru / Сервер заказчика</td></tr>
     </table>
   </div>
 </section>
 
 <section class="slide" id="s11">
   <div class="slide-num">11 / 18</div>
-  <div class="slide-tag">Экономика</div>
-  <div class="eyebrow">Своя система vs Подписки</div>
-  <h1 class="headline">Инфраструктура в собственность без регулярных наценок</h1>
+  <div class="slide-tag">Безопасность</div>
+  <div class="eyebrow">Закрытый контур vs SaaS</div>
+  <h1 class="headline">Абсолютная приватность <span class="accent">без риск-факторов</span></h1>
   <div class="compare">
     <div class="col bad">
-      <h4>Облачные SaaS-сервисы</h4>
+      <h4>Облачные сторонние ИИ-сервисы</h4>
       <ul>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>Ежемесячные платежи за каждого пользователя и гигабайт storage</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>Риск утечки конфиденциальной коммерческой тайны и сканов</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>Невозможность доработать фильтры и сущности под свою специфику</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>Отправка договоров на сторонние зарубежные серверы</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>Риск слива коммерческой тайны и персональных данных</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>Ежемесячные наценки за каждого пользователя и объем запросов</li>
       </ul>
     </div>
     <div class="col good">
-      <h4>Собственная система «Хранитель»</h4>
+      <h4>Локальный комплекс «Хранитель»</h4>
       <ul>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Единоразовая покупка кодовой базы и развёртывание на Рег.ру</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>100% приватность: сервер находится под вашим полным контролем</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Любое количество пользователей без роста абонентской платы</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>100% закрытый контур: данные никогда не покидают ваш сервер</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Соответствие законам РФ о защите персональных данных</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Неограниченное число пользователей без скрытых платежей</li>
       </ul>
     </div>
   </div>
@@ -863,7 +891,7 @@
   <div class="slide-num">12 / 18</div>
   <div class="slide-tag">Экономика</div>
   <div class="eyebrow">Расчёт окупаемости</div>
-  <h1 class="headline">Экономия сотен часов работы команды</h1>
+  <h1 class="headline">Окупаемость с первых месяцев работы</h1>
   <div class="table-wrapper" style="margin-top:24px;">
     <table class="data-table">
       <tr><th>Сценарий</th><th>Без системы</th><th>C системой «Хранитель»</th><th>Экономия</th></tr>
@@ -872,106 +900,118 @@
       <tr><td class="strong">Подготовка подборки в суд</td><td>2 дня работы юриста</td><td class="mono">15 минут (выгрузка)</td><td class="mono">~15 часов юриста</td></tr>
     </table>
   </div>
-  <p class="lede" style="margin-top:22px;">Система окупается в первые 2–3 месяца за счёт освобождения квалифицированных юристов от рутинного разбора бумаг.</p>
+  <p class="lede" style="margin-top:22px;">Освобождает дорогостоящих юристов и руководителей от механической работы, окупая вложения в первый же квартал.</p>
 </section>
 
 <section class="slide" id="s13">
   <div class="slide-num">13 / 18</div>
   <div class="slide-tag">Предложение</div>
-  <div class="eyebrow">Передача продукта</div>
-  <h1 class="headline">Как происходит внедрение системы</h1>
-  <p class="lede">Два понятных формата передачи — в зависимости от наличия собственных IT-специалистов в штате.</p>
+  <div class="eyebrow">Модель поставки</div>
+  <h1 class="headline">Два удобных варианта <span class="accent">под вашу инфраструктуру</span></h1>
+  <p class="lede">Система работает автономно в вашем периметре без использования внешних cloud-API. Выбирайте вариант в зависимости от наличия собственного IT-отдела.</p>
   <div class="grid-2" style="margin-top:40px;">
     <div class="card">
-      <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg></div>
-      <h3>Пакет 1: Код + Инструкция</h3>
-      <p>Передаём исходный код, Docker-скрипты, документацию и разворачиваем на вашем сервере Рег.ру</p>
+      <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
+      <h3>1. Сервер заказчика (Локальный контур)</h3>
+      <p>Оптимально при наличии IT-отдела и своих мощностей. Единоразовая покупка системы с установкой в ваш полностью изолированный контур. Никаких ежемесячных лицензионных платежей.</p>
     </div>
     <div class="card">
-      <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 010 7.75"/></svg></div>
-      <h3>Пакет 2: Под ключ + Поддержка</h3>
-      <p>Полное развёртывание на Рег.ру, настройка распознавания под ваши бланки, обучение и 3 месяца сопровождения</p>
+      <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg></div>
+      <h3>2. Облако Alba Creation</h3>
+      <p>Под ключ, если нет своего IT-отдела. Мы выделяем изолированное пространство на наших GPU-серверах Reg.ru. Вы получаете готовый сервис по фиксированной ежемесячной подписке.</p>
     </div>
   </div>
 </section>
 
 <section class="slide" id="s14">
   <div class="slide-num">14 / 18</div>
-  <div class="slide-tag">Пакет 1</div>
-  <div class="eyebrow">Для компаний с IT-специалистами</div>
-  <h1 class="headline">Код + Внедрение</h1>
-  <div class="grid-2" style="margin-top:20px;align-items:stretch;">
+  <div class="slide-tag">Тарифы</div>
+  <div class="eyebrow">Инвестиции в продукт</div>
+  <h1 class="headline">Прозрачные условия внедрения</h1>
+  <div class="grid-2" style="margin-top:28px;align-items:stretch;">
+
     <div class="pkg-card">
-      <div class="pkg-for">Что входит</div>
+      <div class="pkg-scope">Вариант 1 · Сервер заказчика</div>
+      <h3>Локальный контур</h3>
+      <div class="pkg-price">350 000 ₽ разово</div>
       <ul>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Полный исходный код frontend & backend компонентов</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Настройка Docker Compose и деплой на Рег.ру</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Подключение Tesseract OCR, GPT 5.6 Luna</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Документация по архитектуре и развёртыванию</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Развёртывание в вашем изолированном контуре</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Полная автономия работы нейросети внутри сервера</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Адаптация NER-фильтров под ваши документы</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Объём архива ограничен только вашими дисками</li>
       </ul>
-      <div class="pkg-time">Срок передачи: 1–2 недели</div>
+      <div class="pkg-time">Требования: Сервер с GPU (VRAM 12-16GB+), RAM 32GB+</div>
     </div>
-    <div>
-      <div class="stat" style="margin-bottom:28px;">
-        <div class="val">300 000 ₽</div>
-        <div class="lab">единоразово, за передачу прав и кода</div>
-      </div>
-      <p class="lede">Вы получаете полную независимость и возможность дорабатывать систему силами собственных штатных программистов.</p>
+
+    <div class="pkg-card featured">
+      <div class="pkg-scope">Вариант 2 · Облако Alba Creation</div>
+      <h3>Облачное использование</h3>
+      <div class="pkg-price">25 000 ₽ / мес</div>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Размещение на наших GPU-серверах Reg.ru</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Обучение команды работе с системой</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><b>Включено 50 ГБ в год</b> быстрого NVMe-хранилища</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Полное техническое сопровождение и бэкапы 24/7</li>
+      </ul>
+      <div class="pkg-support">Разовая настройка пространства: <b>50 000 ₽</b></div>
+      <div class="pkg-time">Внедрение: 1 неделя</div>
     </div>
+
   </div>
 </section>
 
 <section class="slide" id="s15">
   <div class="slide-num">15 / 18</div>
-  <div class="slide-tag">Пакет 2</div>
-  <div class="eyebrow">Рекомендуемый вариант</div>
-  <h1 class="headline">Внедрение «под ключ» + Поддержка</h1>
-  <div class="grid-2" style="margin-top:20px;align-items:stretch;">
-    <div class="pkg-card featured">
-      <div class="pkg-for">Всё из пакета 1, плюс</div>
+  <div class="slide-tag">Масштабирование</div>
+  <div class="eyebrow">Управление объёмами</div>
+  <h1 class="headline">Прозрачный контроль хранения в Облаке</h1>
+  <p class="lede">Мы гарантируем высокий уровень защиты и мгновенную скорость поиска. Базового лимита достаточно для большинства компаний, а расширение происходит легко и прозрачно.</p>
+  <div class="compare" style="margin-top:8px;">
+    <div class="col good">
+      <h4>Базовый объём (Включен в подписку)</h4>
       <ul>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>3 месяца технической поддержки и обновлений</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Развёртывание и тонкая настройка хостинга на Рег.ру</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Адаптация фильтров сущностей (NER) под ваши документы</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Обучение сотрудников и приоритетная поддержка</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><b>50 ГБ NVMe-хранилища на год</b> на максимальных скоростях</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Вмещает до 100 000 страниц сканов, PDF и договоров</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Векторный индекс pgvector и бэкапы уже в стоимости</li>
       </ul>
-      <div class="pkg-time">Срок: 2 недели внедрение + 3 месяца сопровождения</div>
     </div>
-    <div>
-      <div class="stat" style="margin-bottom:28px;">
-        <div class="val"><span class="accent">400 000 ₽</span></div>
-        <div class="lab">единоразово под ключ с поддержкой</div>
-      </div>
-      <p class="lede">Идеальный вариант для юридических и коммерческих компаний, которым нужен готовый рабочий инструмент без необходимости нанимать программистов.</p>
+    <div class="col bad" style="background:var(--surface-2); border-color:var(--border);">
+      <h4>Расширение при росте архива</h4>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 4v16m8-8H4"/></svg>Мгновенное добавление пространства без остановки сервиса</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 4v16m8-8H4"/></svg><b>+1 000 ₽ / мес</b> за каждые дополнительные 50 ГБ</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 4v16m8-8H4"/></svg>Без жестких лимитов на максимальный объём базы</li>
+      </ul>
     </div>
   </div>
+  <p class="lede" style="margin-top:24px;">При развёртывании на сервере заказчика объём хранимых данных ограничен только ёмкостью дисков на вашем сервере.</p>
 </section>
 
 <section class="slide" id="s16">
   <div class="slide-num">16 / 18</div>
   <div class="slide-tag">Преимущества</div>
   <div class="eyebrow">Alba Creation</div>
-  <h1 class="headline">Надёжность и качество разработки</h1>
+  <h1 class="headline">Надёжность и инженерное качество</h1>
   <div class="grid-4" style="margin-top:44px;">
     <div class="card">
       <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-4M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg></div>
-      <h3>Готово к бою</h3>
-      <p>Архитектура протестирована на реальных больших массивах документов и сканов</p>
+      <h3>Проверено в бою</h3>
+      <p>Архитектура протестирована на реальных гигабайтных массивах юридических документов</p>
     </div>
     <div class="card">
       <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 8V6a5 5 0 00-10 0v2M5 8h14l-1 12H6L5 8z"/></svg></div>
       <h3>Без Vendor Lock-in</h3>
-      <p>Полные права на софт передаются вам — вы не привязаны к подписке или к нам</p>
+      <p>Полные права на софт передаются вам — вы не привязаны к вендору или подписке</p>
     </div>
     <div class="card">
       <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg></div>
-      <h3>Хостинг в РФ</h3>
-      <p>Быстрое развёртывание на серверной инфраструктуре Рег.ру в соответствие с законами РФ</p>
+      <h3>Серверы в РФ (Reg.ru)</h3>
+      <p>Быстрое развёртывание на серверной инфраструктуре РФ в полном соответствии с законами</p>
     </div>
     <div class="card">
       <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
-      <h3>Высокая скорость</h3>
-      <p>Оптимизированные алгоритмы индексации и мгновенный выбор рабочих сущностей</p>
+      <h3>Гибкая адаптация</h3>
+      <p>Настройка параметров поиска и аналитики под задачи и специфику документов клиента</p>
     </div>
   </div>
 </section>
@@ -981,11 +1021,11 @@
   <div class="slide-tag">Контакты</div>
   <div class="eyebrow">Свяжитесь с нами</div>
   <h1 class="headline">Обсудим развёртывание и проведём демонстрацию</h1>
-  <p class="lede">Пришлите примерный объём вашего архива и количество пользователей — мы подготовим демо-стенд на ваших примерах сканов.</p>
+  <p class="lede">Пришлите примерный объём вашего архива и количество пользователей — мы развернём демо-стенд на ваших примерах сканов в закрытом контуре.</p>
   <div class="contact-list">
     <div class="row"><span class="k">Компания</span><span class="v">Alba Creation</span></div>
     <div class="row"><span class="k">Сайт</span><span class="v"><a href="https://alba-creation.ru" target="_blank">alba-creation.ru</a></span></div>
-    <div class="row"><span class="k">Хостинг</span><span class="v">Рег.ру (Reg.ru)</span></div>
+    <div class="row"><span class="k">Инфраструктура</span><span class="v">Рег.ру (Reg.ru Cloud GPU) / Сервер заказчика</span></div>
     <div class="row"><span class="k">Почта</span><span class="v"><a href="mailto:sklemin0408@gmail.com">sklemin0408@gmail.com</a></span></div>
     <div class="row"><span class="k">Telegram</span><span class="v"><a href="https://t.me/KirillSKlemin" target="_blank">@KirillSKlemin</a></span></div>
   </div>
@@ -998,7 +1038,7 @@
   <canvas id="graph-canvas-2" class="graph-bg"></canvas>
   <div class="closing-inner">
     <div class="eyebrow" style="justify-content:center;">Спасибо</div>
-    <h1>Порядок в архиве — это скорость вашего бизнеса. <span class="accent">Мы уже создали «Хранитель»</span> — осталось развернуть его у вас.</h1>
+    <h1>Порядок и безопасность архива — это скорость и спокойствие вашего бизнеса. <span class="accent">«Хранитель» готов к развёртыванию.</span></h1>
     <div class="final-tag">Хранитель · Alba Creation · alba-creation.ru</div>
   </div>
 </section>
@@ -1065,7 +1105,6 @@
     }
   });
 
-  /* Увеличение скриншотов по клику */
   var lightbox = document.getElementById('lightbox-modal');
   var lightboxImg = document.getElementById('lightbox-img');
 
